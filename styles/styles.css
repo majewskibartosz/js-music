@@ -97,3 +97,7 @@ body {
 .box:hover {
   background-color: white;
 }
+
+.highlight {
+  background-color: rgb(255, 141, 10);
+}

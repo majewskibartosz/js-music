@@ -11,7 +11,7 @@ document.documentElement.addEventListener('mousedown', () => {
 // DOM ELEMENTS
 // ==============================================================
 
-const spans = document.getElementsByClassName('box')
+const spans = document.querySelectorAll('span')
 for (let i = 0; i < spans.length; i++ ) {
   spans[i].addEventListener('click', (e) => {
     e.target.classList.toggle('clicked')
@@ -37,8 +37,13 @@ const rows = document.body.querySelectorAll('div > div')
 const notes = ['G2']
 let index = 0
 
-Tone.Transport.scheduleRepeat(repeat, '4n')
+Tone.Transport.scheduleRepeat(repeat, '8n')
+Tone.Transport.bpm.value = '125'
 Tone.Transport.start()
+
+function highlightRow() {
+  let step = index %16
+}
 
 function repeat(time) {
   let step = index % 16
@@ -48,9 +53,16 @@ function repeat(time) {
     let row  = rows[i]
     let input = row.querySelector(`span:nth-child(${step + 1})`)
     if (input.classList.contains('clicked')) {
-      console.log('works')
       synth.triggerAttackRelease(note, '8n', time)
     }
+    Tone.Draw.schedule(function(){
+      input.classList.add('highlight')
+      setTimeout(() => {
+        input.classList.remove('highlight')
+      }, 166)
+    }, time)
   }
   index++
 }
+
+
