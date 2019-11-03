@@ -25,59 +25,50 @@ const swingBtn = document.getElementsByClassName('switch')[1]
 // select clear button
 const clearBtn = document.getElementsByClassName('switch')[2]
 
-// ==============================================================
-// SYNTH AND SOUND SETUP
-// ==============================================================
+// Start of beat - marker
+// On 1, 5, 9, 13 step mark start of beat with css class
+let markers = document.querySelectorAll('div > div:last-child > span')
+for (let i = 1; i< markers.length; i++) {
+  markers[0].classList.add('beat-mark')
+  if (i % 4 === 0) {
+    markers[i].classList.add('beat-mark')
+  }
+}
 
+// ==============================================================
+// SOUND SETUP
+// ==============================================================
 // Create drum kit
 const kit = new Tone.Sampler({
-  "C2"  : "/sounds/TONE1.wav",
-  "D2"  : "/sounds/STICK.wav",
-  "E2"  : "/sounds/RIDE.wav",
-  "F2" : "/sounds/FX2.wav",
-  "G2" : "/sounds/FX1.wav",
-  "C3" : "/sounds/CHH2.wav",
-  "D3"  : "/sounds/CHH.wav",
-  "G3"  : "/sounds/KICK.wav"
+  "C2" : "TONE1.wav",
+  "D2" : "STICK.wav",
+  "E2" : "RIDE.wav",
+  "F2" : "FX2.wav",
+  "G2" : "FX1.wav",
+  "C3" : "CHH2.wav",
+  "D3" : "CHH.wav",
+  "G3" : "KICK.wav"
 },{
     "release" : 1,
+    "baseUrl" : "/sounds/"
 })
-// // Create synth array
-// const synths = [
-//   new Tone.Synth(),
-//   new Tone.Synth(),
-//   new Tone.Synth(),
-//   new Tone.Synth(),
-//   new Tone.Synth(),
-//   new Tone.Synth(),
-//   new Tone.Synth(),
-//   new Tone.Synth()
-// ]
-
-// synths[0].oscillator.type = 'triangle'
 
 // Connect synth to master gain (speakers)
 const gain = new Tone.Gain(0.6)
 gain.toMaster()
 kit.connect(gain)
-// synths.forEach(synth => synth.connect(gain))
 
 // Select rows of sequencer
 const rows = document.body.querySelectorAll('div > div')
-// const notes = ['B6', 'E4', 'F#3', 'G4',
-//               'A3', 'B4', 'C#4', 'Eb3']
 const sounds = ["C2", "D2", "E2", "F2", "G2", "C3", "D3", "G3"];
 let index = 0
 
 // ==============================================================
 // SEQUENCER CONTROLS
 // ==============================================================
-
 Tone.Transport.scheduleRepeat(repeat, '8n')
 Tone.Transport.start()
 Tone.Transport.bpm.value = 200
-
-
 
 // ==============================================================
 // SEQUENCER SETUP
@@ -85,9 +76,7 @@ Tone.Transport.bpm.value = 200
 function repeat(time) {
   let step = index % 16
   for (let i = 0; i < rows.length; i++) {
-    // let synth = synths[i]
     let sound = sounds[i]
-    // let note  = notes[i]
     let row  = rows[i]
     let input = row.querySelector(`span:nth-child(${step + 1})`)
     if (input.classList.contains('clicked')) {
@@ -95,12 +84,12 @@ function repeat(time) {
       kit.triggerAttack(sound, time)
     }
     // Draw sequencer movement
-    Tone.Draw.schedule(function(){
+    Tone.Draw.schedule(() => {
       input.classList.add('highlight')
       // Delete highlight class after specified time
       setTimeout(() => {
         input.classList.remove('highlight')
-      }, 166)
+      }, 140)
     }, time)
   }
   index++
