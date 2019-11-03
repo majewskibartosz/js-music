@@ -89,12 +89,45 @@ function repeat(time) {
       // Delete highlight class after specified time
       setTimeout(() => {
         input.classList.remove('highlight')
-      }, 140)
+      }, 120)
     }, time)
   }
   index++
 }
 
+// ==============================================================
+// METHODS
+// ==============================================================
+
+// Swing toggle
+const toggleSwing = (button) => {
+  if (button.value === 'OFF') {
+    Tone.Transport.swing = 0.2
+    button.value = 'ON'
+    button.textContent = 'SWING OFF'
+  } else {
+    Tone.Transport.swing = 0
+    button.value = 'OFF'
+    button.textContent = `SWING ON_`
+  }
+}
+
+// Play Pause toggle
+const togglePlayPause = (button) => {
+  if (button.value === 'ON') {
+    Tone.Transport.stop()
+    button.value = 'OFF'
+    button.textContent = 'PLAY_'
+  } else {
+    Tone.Transport.start()
+    button.value = 'ON'
+    button.textContent = 'PAUSE'
+  }
+}
+
+
+
+// change button display value ON or OFF
 
 // ==============================================================
 // EVENT LISTENERS
@@ -103,13 +136,13 @@ function repeat(time) {
 // Setup play/pause button
 playBtn.addEventListener('click', () => {
   // Tone.Transport.toggle()
-  Tone.Transport.toggle()
+  togglePlayPause(playBtn)
 })
 
 // Setup swing button
 // TODO change to be a toggle switch
 swingBtn.addEventListener('click', () => {
-  Tone.Transport.swing = 0.4
+  toggleSwing(swingBtn)
 })
 
 // Setup clear button
