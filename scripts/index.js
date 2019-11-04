@@ -16,14 +16,9 @@ document.documentElement.addEventListener('mousedown', () => {
 // ==============================================================
 // DOM ELEMENTS
 // ==============================================================
-// TODO change click event to be mousedown event, allow continuos drawing of pattern
-// Select all boxes (spans) and toggle css class on click event
+// Select all boxes (spans)
 const spans = document.querySelectorAll('span')
-for (let i = 0; i < spans.length; i++ ) {
-  spans[i].addEventListener('click', (e) => {
-    e.target.classList.toggle('clicked')
-  })
-}
+
 // Select button elements
 const playBtn = document.getElementsByClassName('switch')[0]
 const swingBtn = document.getElementsByClassName('switch')[1]
@@ -77,14 +72,20 @@ Tone.Transport.bpm.value = 200
 // ==============================================================
 // SEQUENCER SETUP
 // ==============================================================
+let velocity =  (Math.random() * 0.5 + 0.5) // randomize velocity of each step
 function repeat(time) {
+
   let step = index % 16
   for (let i = 0; i < rows.length; i++) {
     let sound = sounds[i]
     let row  = rows[i]
     let input = row.querySelector(`span:nth-child(${step + 1})`)
-    if (input.classList.contains('clicked')) {
-      kit.triggerAttack(sound, time)
+    let hasClicked = input.classList.contains('clicked')
+    let hasDoubleClicked = input.classList.contains('dbl-clicked')
+    if (hasClicked) {
+      kit.triggerAttack(sound, time, velocity)
+    } else if (hasDoubleClicked) {
+      kit.triggerAttack(sound, time, velocity / 2)
     }
     Tone.Draw.schedule(() => { // Draw sequencer movement
       modifyHighlightClass(input)
@@ -149,6 +150,18 @@ function modifyHighlightClass (element) {
 // ==============================================================
 // EVENT LISTENERS
 // ==============================================================
+//  toggle css class on click event
+// TODO change click event to be mousedown event, allow continuos drawing of pattern
+for (let i = 0; i < spans.length; i++ ) {
+  spans[i].addEventListener('click', (e) => {
+    e.target.classList.toggle('clicked')
+    e.target.classList.remove('dbl-clicked')
+  })
+  spans[i].addEventListener('dblclick', (e) => {
+    e.target.classList.toggle('dbl-clicked');
+    e.target.classList.remove('clicked')
+  });
+}
 
 // Setup play/pause button
 playBtn.addEventListener('click', () => {
@@ -163,6 +176,6 @@ swingBtn.addEventListener('click', () => {
 // Setup clear button
 clearBtn.addEventListener('click', () => {
   for (let i = 0; i < spans.length; i++ ) {
-    spans[i].classList.remove('clicked')
+    spans[i].classList.remove('clicked', 'dbl-clicked')
   }
 })
