@@ -1,16 +1,22 @@
-'use strict'
-
 // UPDATE: there is a problem in chrome with starting audio context
 //  before a user gesture. This fixes it.
 document.documentElement.addEventListener('mousedown', () => {
   if (Tone.context.state !== 'running') Tone.context.resume()
 })
 
+// // Ask user to take action if it is on Google Chrome
+// window.addEventListener("load", function() {
+//   // CHROME
+//   if (navigator.userAgent.indexOf("Chrome") != -1 ) {
+//     alert("Google Chrome");
+//   }
+// })
+
 
 // ==============================================================
 // DOM ELEMENTS
 // ==============================================================
-
+// TODO change click event to be mousedown event, allow continuos drawing of pattern
 // Select all boxes (spans) and toggle css class on click event
 const spans = document.querySelectorAll('span')
 for (let i = 0; i < spans.length; i++ ) {
@@ -18,11 +24,9 @@ for (let i = 0; i < spans.length; i++ ) {
     e.target.classList.toggle('clicked')
   })
 }
-// select play/pause button
+// Select button elements
 const playBtn = document.getElementsByClassName('switch')[0]
-// select swing button
 const swingBtn = document.getElementsByClassName('switch')[1]
-// select clear button
 const clearBtn = document.getElementsByClassName('switch')[2]
 
 // Start of beat - marker
@@ -80,16 +84,10 @@ function repeat(time) {
     let row  = rows[i]
     let input = row.querySelector(`span:nth-child(${step + 1})`)
     if (input.classList.contains('clicked')) {
-      // synth.triggerAttackRelease(note, '8n', time)
       kit.triggerAttack(sound, time)
     }
-    // Draw sequencer movement
-    Tone.Draw.schedule(() => {
-      input.classList.add('highlight')
-      // Delete highlight class after specified time
-      setTimeout(() => {
-        input.classList.remove('highlight')
-      }, 120)
+    Tone.Draw.schedule(() => { // Draw sequencer movement
+      modifyHighlightClass(input)
     }, time)
   }
   index++
@@ -98,18 +96,23 @@ function repeat(time) {
 // ==============================================================
 // METHODS
 // ==============================================================
-
+// TODO refactor button to be more universal where you pass btn as value
 // Swing toggle
+let hasSwing = false
 const toggleSwing = (button) => {
   if (button.value === 'OFF') {
     Tone.Transport.swing = 0.2
     button.value = 'ON'
     button.textContent = 'SWING OFF'
+    hasSwing = true
+
   } else {
     Tone.Transport.swing = 0
     button.value = 'OFF'
     button.textContent = `SWING ON_`
+    hasSwing = false
   }
+  return hasSwing
 }
 
 // Play Pause toggle
@@ -125,9 +128,23 @@ const togglePlayPause = (button) => {
   }
 }
 
+// Add or remove class - depends on swing status
+function modifyHighlightClass (element) {
+  this.element = element
+  if (!hasSwing) {
+    element.classList.add('highlight')
+    setTimeout(() => { // Delete highlight class after specified time
+      element.classList.remove('highlight')
+    }, 120)
+  } else { 
+    element.classList.add('highlight-swing')
+    setTimeout(() => {  // Delete highlight class after specified time
+      element.classList.remove('highlight-swing')
+    }, 120)
+  }
+}
 
 
-// change button display value ON or OFF
 
 // ==============================================================
 // EVENT LISTENERS
@@ -135,12 +152,10 @@ const togglePlayPause = (button) => {
 
 // Setup play/pause button
 playBtn.addEventListener('click', () => {
-  // Tone.Transport.toggle()
   togglePlayPause(playBtn)
 })
 
 // Setup swing button
-// TODO change to be a toggle switch
 swingBtn.addEventListener('click', () => {
   toggleSwing(swingBtn)
 })
