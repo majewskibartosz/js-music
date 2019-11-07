@@ -4,15 +4,6 @@ document.documentElement.addEventListener('mousedown', () => {
   if (Tone.context.state !== 'running') Tone.context.resume()
 })
 
-// // Ask user to take action if it is on Google Chrome
-// window.addEventListener("load", function() {
-//   // CHROME
-//   if (navigator.userAgent.indexOf("Chrome") != -1 ) {
-//     alert("Google Chrome");
-//   }
-// })
-
-
 // ==============================================================
 // DOM ELEMENTS
 // ==============================================================
@@ -24,10 +15,10 @@ const playBtn = document.getElementsByClassName('switch')[0]
 const swingBtn = document.getElementsByClassName('switch')[1]
 const clearBtn = document.getElementsByClassName('switch')[2]
 
-// Start of beat - marker
+// Setup beat markers
 // On 1, 5, 9, 13 step mark start of beat with css class
 let markers = document.querySelectorAll('div > div:last-child > span')
-for (let i = 1; i< markers.length; i++) {
+for (let i = 1; i < markers.length; i++) {
   markers[0].classList.add('beat-mark')
   if (i % 4 === 0) {
     markers[i].classList.add('beat-mark')
@@ -152,12 +143,12 @@ function modifyHighlightClass (element) {
 // ==============================================================
 //  toggle css class on click event
 // TODO change click event to be mousedown event, allow continuos drawing of pattern
-for (let i = 0; i < spans.length; i++ ) {
-  spans[i].addEventListener('click', (e) => {
+for (let span of spans) {
+  span.addEventListener('click', (e) => {
     e.target.classList.toggle('clicked')
     e.target.classList.remove('dbl-clicked')
   })
-  spans[i].addEventListener('dblclick', (e) => {
+  span.addEventListener('dblclick', (e) => {
     e.target.classList.toggle('dbl-clicked');
     e.target.classList.remove('clicked')
   });
@@ -175,7 +166,7 @@ swingBtn.addEventListener('click', () => {
 
 // Setup clear button
 clearBtn.addEventListener('click', () => {
-  for (let i = 0; i < spans.length; i++ ) {
-    spans[i].classList.remove('clicked', 'dbl-clicked')
+  for (let span of spans) {
+    span.classList.remove('clicked', 'dbl-clicked')
   }
 })
