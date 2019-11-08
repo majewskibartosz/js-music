@@ -1,8 +1,10 @@
 // UPDATE: there is a problem in chrome with starting audio context
 //  before a user gesture. This fixes it.
-document.documentElement.addEventListener('mousedown', () => {
-  if (Tone.context.state !== 'running') Tone.context.resume()
-})
+// document.documentElement.addEventListener('mousedown', (e) => {
+//   e.preventDefault()
+//   if (Tone.context.state !== 'running') Tone.context.resume()
+// })
+
 
 // ==============================================================
 // DOM ELEMENTS
@@ -14,6 +16,9 @@ const spans = document.querySelectorAll('span')
 const playBtn = document.getElementsByClassName('switch')[0]
 const swingBtn = document.getElementsByClassName('switch')[1]
 const clearBtn = document.getElementsByClassName('switch')[2]
+// Select range slider (bpm)
+const slider = document.querySelector(".slider")
+const output = document.querySelector(".bpm-value")
 
 // Setup beat markers
 // On 1, 5, 9, 13 step mark start of beat with css class
@@ -56,16 +61,15 @@ let index = 0
 // ==============================================================
 // SEQUENCER CONTROLS
 // ==============================================================
-Tone.Transport.scheduleRepeat(repeat, '8n')
-Tone.Transport.start()
-Tone.Transport.bpm.value = 200
+Tone.Transport.scheduleRepeat(repeat, '16n')
+// Tone.Transport.start()
+Tone.Transport.bpm.value = 120
 
 // ==============================================================
 // SEQUENCER SETUP
 // ==============================================================
 let velocity =  (Math.random() * 0.5 + 0.5) // randomize velocity of each step
 function repeat(time) {
-
   let step = index % 16
   for (let i = 0; i < rows.length; i++) {
     let sound = sounds[i]
@@ -93,7 +97,7 @@ function repeat(time) {
 let hasSwing = false
 const toggleSwing = (button) => {
   if (button.value === 'OFF') {
-    Tone.Transport.swing = 0.2
+    Tone.Transport.swing = 0.1
     button.value = 'ON'
     button.textContent = 'SWING OFF'
     hasSwing = true
@@ -136,8 +140,6 @@ function modifyHighlightClass (element) {
   }
 }
 
-
-
 // ==============================================================
 // EVENT LISTENERS
 // ==============================================================
@@ -145,28 +147,41 @@ function modifyHighlightClass (element) {
 // TODO change click event to be mousedown event, allow continuos drawing of pattern
 for (let span of spans) {
   span.addEventListener('click', (e) => {
+    e.preventDefault()
     e.target.classList.toggle('clicked')
     e.target.classList.remove('dbl-clicked')
   })
   span.addEventListener('dblclick', (e) => {
+    e.preventDefault()
     e.target.classList.toggle('dbl-clicked');
     e.target.classList.remove('clicked')
   });
 }
 
 // Setup play/pause button
-playBtn.addEventListener('click', () => {
+playBtn.addEventListener('click', (e) => {
+  e.preventDefault()
   togglePlayPause(playBtn)
 })
 
 // Setup swing button
-swingBtn.addEventListener('click', () => {
+swingBtn.addEventListener('click', (e) => {
+  e.preventDefault()
   toggleSwing(swingBtn)
 })
 
 // Setup clear button
-clearBtn.addEventListener('click', () => {
+clearBtn.addEventListener('click', (e) => {
+  e.preventDefault()
   for (let span of spans) {
     span.classList.remove('clicked', 'dbl-clicked')
   }
 })
+
+// Setup BPM slider
+output.innerHTML = slider.value
+
+slider.oninput = function() {
+  output.innerHTML = this.value
+  Tone.Transport.bpm.value = this.value
+}
