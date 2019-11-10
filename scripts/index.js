@@ -1,10 +1,11 @@
+import { toggleSwing, togglePlayPause, modifyHighlightClass, singleClick, doubleClick } from './functions.mjs'
+
 // UPDATE: there is a problem in chrome with starting audio context
 //  before a user gesture. This fixes it.
 // document.documentElement.addEventListener('mousedown', (e) => {
 //   e.preventDefault()
 //   if (Tone.context.state !== 'running') Tone.context.resume()
 // })
-
 
 // ==============================================================
 // DOM ELEMENTS
@@ -62,7 +63,6 @@ let index = 0
 // SEQUENCER CONTROLS
 // ==============================================================
 Tone.Transport.scheduleRepeat(repeat, '16n')
-// Tone.Transport.start()
 Tone.Transport.bpm.value = 120
 
 // ==============================================================
@@ -90,72 +90,13 @@ function repeat(time) {
 }
 
 // ==============================================================
-// METHODS
-// ==============================================================
-// TODO refactor button to be more universal where you pass btn as value
-// Swing toggle
-let hasSwing = false
-const toggleSwing = (button) => {
-  if (button.value === 'OFF') {
-    Tone.Transport.swing = 0.1
-    button.value = 'ON'
-    button.textContent = 'SWING OFF'
-    hasSwing = true
-
-  } else {
-    Tone.Transport.swing = 0
-    button.value = 'OFF'
-    button.textContent = `SWING ON_`
-    hasSwing = false
-  }
-  return hasSwing
-}
-
-// Play Pause toggle
-const togglePlayPause = (button) => {
-  if (button.value === 'ON') {
-    Tone.Transport.stop()
-    button.value = 'OFF'
-    button.textContent = 'PLAY_'
-  } else {
-    Tone.Transport.start()
-    button.value = 'ON'
-    button.textContent = 'PAUSE'
-  }
-}
-
-// Add or remove class - depends on swing status
-function modifyHighlightClass (element) {
-  this.element = element
-  if (!hasSwing) {
-    element.classList.add('highlight')
-    setTimeout(() => { // Delete highlight class after specified time
-      element.classList.remove('highlight')
-    }, 120)
-  } else { 
-    element.classList.add('highlight-swing')
-    setTimeout(() => {  // Delete highlight class after specified time
-      element.classList.remove('highlight-swing')
-    }, 120)
-  }
-}
-
-// ==============================================================
 // EVENT LISTENERS
 // ==============================================================
 //  toggle css class on click event
 // TODO change click event to be mousedown event, allow continuos drawing of pattern
 for (let span of spans) {
-  span.addEventListener('click', (e) => {
-    e.preventDefault()
-    e.target.classList.toggle('clicked')
-    e.target.classList.remove('dbl-clicked')
-  })
-  span.addEventListener('dblclick', (e) => {
-    e.preventDefault()
-    e.target.classList.toggle('dbl-clicked');
-    e.target.classList.remove('clicked')
-  });
+  span.addEventListener('click', singleClick)
+  span.addEventListener('dblclick', doubleClick)
 }
 
 // Setup play/pause button
