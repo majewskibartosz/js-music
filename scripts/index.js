@@ -1,4 +1,4 @@
-import { toggleSwing, togglePlayPause, singleClick, doubleClick } from './functions.mjs'
+import { toggleButton, singleClick, doubleClick } from './functions.mjs'
 import { repeat } from './sequencer.mjs'
 
 // CHROME FIX 
@@ -52,13 +52,13 @@ for (let span of spans) {
 // Setup play/pause button
 playBtn.addEventListener('click', (e) => {
   e.preventDefault()
-  togglePlayPause(playBtn)
+  toggleButton(playBtn)
 })
 
 // Setup swing button
 swingBtn.addEventListener('click', (e) => {
   e.preventDefault()
-  toggleSwing(swingBtn)
+  toggleButton(swingBtn)
 })
 
 // Setup clear button

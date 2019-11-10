@@ -3,6 +3,7 @@ import { modifyHighlightClass } from './functions.mjs'
 // ==============================================================
 // SOUND SETUP
 // ==============================================================
+// TODO refactor into seperate method createKit(style), where style === techno, hh, etc
 // Create drum kit
 const kit = new Tone.Sampler({
   "C2" : "TONE1.wav",
