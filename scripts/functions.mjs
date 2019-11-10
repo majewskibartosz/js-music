@@ -60,4 +60,4 @@ function doubleClick(e) {
   this.classList.remove('clicked')
 }
 
-export { hasSwing, toggleSwing, togglePlayPause, modifyHighlightClass, singleClick, doubleClick }
+export { toggleSwing, togglePlayPause, modifyHighlightClass, singleClick, doubleClick }
