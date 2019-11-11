@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { toggleButton, singleClick, doubleClick } from './functions.mjs'
 import { repeat } from './sequencer.mjs'
 
