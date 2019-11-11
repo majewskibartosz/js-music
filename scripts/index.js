@@ -1,15 +1,13 @@
 import { toggleButton, singleClick, doubleClick } from './functions.mjs'
 import { repeat } from './sequencer.mjs'
 
-// CHROME FIX 
+// CHROME FIX
 // UPDATE: there is a problem in chrome with starting audio context
 //  before a user gesture. This fixes it.
 // document.documentElement.addEventListener('mousedown', (e) => {
 //   e.preventDefault()
 //   if (Tone.context.state !== 'running') Tone.context.resume()
 // })
-
-
 // ==============================================================
 // DOM ELEMENTS
 // ==============================================================
@@ -22,12 +20,12 @@ const swingBtn = document.getElementsByClassName('switch')[1]
 const clearBtn = document.getElementsByClassName('switch')[2]
 
 // Select range slider (bpm)
-const slider = document.querySelector(".slider")
-const output = document.querySelector(".bpm-value")
+const slider = document.querySelector('.slider')
+const output = document.querySelector('.bpm-value')
 
 // Setup beat markers
 // On 1, 5, 9, 13 step mark start of beat with css class
-let markers = document.querySelectorAll('div > div:last-child > span')
+const markers = document.querySelectorAll('div > div:last-child > span')
 for (let i = 1; i < markers.length; i++) {
   markers[0].classList.add('beat-mark')
   if (i % 4 === 0) {
@@ -44,7 +42,7 @@ Tone.Transport.scheduleRepeat(repeat, '16n')
 // EVENT LISTENERS
 // ==============================================================
 //  toggle css class on click event
-for (let span of spans) {
+for (const span of spans) {
   span.addEventListener('click', singleClick)
   span.addEventListener('dblclick', doubleClick)
 }
@@ -64,14 +62,14 @@ swingBtn.addEventListener('click', (e) => {
 // Setup clear button
 clearBtn.addEventListener('click', (e) => {
   e.preventDefault()
-  for (let span of spans) {
+  for (const span of spans) {
     span.classList.remove('clicked', 'dbl-clicked')
   }
 })
 
 // Setup BPM slider
 output.innerHTML = slider.value
-slider.oninput = function() {
+slider.oninput = function () {
   output.innerHTML = this.value
   Tone.Transport.bpm.value = this.value
 }
