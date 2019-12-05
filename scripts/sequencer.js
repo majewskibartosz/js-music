@@ -8,11 +8,11 @@ import { modifyHighlightClass } from './functions.js'
 const kit = new Tone.Sampler({
   C2: 'TONE1.wav',
   E2: 'TONE2.wav',
-  D2: 'TOM.wav',
+  D2: 'TONE3.wav',
   F2: 'FX2.wav',
   G2: 'CLAP.wav',
-  C3: 'RIDE.wav',
-  D3: 'CHH.wav',
+  C3: 'CHH.wav',
+  D3: 'TOM.wav',
   G3: 'KICK.wav'
 }, {
   release: 1,
