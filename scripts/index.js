@@ -1,14 +1,6 @@
 /* eslint-disable no-undef */
 import { toggleButton, singleClick, doubleClick } from './functions.js'
 import { repeat } from './sequencer.js'
-
-// CHROME FIX
-// UPDATE: there is a problem in chrome with starting audio context
-//  before a user gesture. This fixes it.
-document.documentElement.addEventListener('mousedown', (e) => {
-  e.preventDefault()
-  if (Tone.context.state !== 'running') Tone.context.resume()
-})
 // ==============================================================
 // DOM ELEMENTS
 // ==============================================================

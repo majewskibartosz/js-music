@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { modifyHighlightClass } from './functions.mjs'
+import { modifyHighlightClass } from './functions.js'
 
 // ==============================================================
 // SOUND SETUP
@@ -7,11 +7,11 @@ import { modifyHighlightClass } from './functions.mjs'
 // Create drum kit
 const kit = new Tone.Sampler({
   C2: 'TONE1.wav',
-  D2: 'STICK.wav',
-  E2: 'RIDE.wav',
+  E2: 'TONE2.wav',
+  D2: 'TOM.wav',
   F2: 'FX2.wav',
-  G2: 'FX1.wav',
-  C3: 'CHH2.wav',
+  G2: 'CLAP.wav',
+  C3: 'RIDE.wav',
   D3: 'CHH.wav',
   G3: 'KICK.wav'
 }, {
