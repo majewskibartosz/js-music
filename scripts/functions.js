@@ -31,7 +31,6 @@ function toggleButton (button) {
   }
 }
 
-// TODO not sure about ternary, maybe change to normal if else statement
 function modifyClass (el, action, elClass) {
   action === 'add' ? el.classList.add(elClass)
     : action === 'remove' ? el.classList.remove(elClass)
@@ -53,7 +52,6 @@ function modifyHighlightClass (el) {
   }
 }
 
-// TODO could improve here and fix it into one method
 function singleClick (el) {
   el = el.target
   modifyClass(el, 'toggle', 'clicked')

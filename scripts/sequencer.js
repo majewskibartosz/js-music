@@ -4,7 +4,6 @@ import { modifyHighlightClass } from './functions.mjs'
 // ==============================================================
 // SOUND SETUP
 // ==============================================================
-// TODO refactor into separate method createKit(style), where style === techno, hh, etc
 // Create drum kit
 const kit = new Tone.Sampler({
   C2: 'TONE1.wav',
@@ -27,13 +26,12 @@ kit.connect(gain)
 // ==============================================================
 // SEQUENCER SETUP
 // ==============================================================
-
-// Select rows of sequencer
 const rows = document.body.querySelectorAll('div > div')
 const sounds = ['C2', 'D2', 'E2', 'F2', 'G2', 'C3', 'D3', 'G3']
 let index = 0
 
 const velocity = (Math.random() * 0.5 + 0.5) // randomize velocity of each step
+//  MAIN SEQUENCER LOOP
 function repeat (time) {
   const step = index % 16
   for (let i = 0; i < rows.length; i++) {

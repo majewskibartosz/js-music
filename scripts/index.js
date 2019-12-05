@@ -1,14 +1,14 @@
 /* eslint-disable no-undef */
-import { toggleButton, singleClick, doubleClick } from './functions.mjs'
-import { repeat } from './sequencer.mjs'
+import { toggleButton, singleClick, doubleClick } from './functions.js'
+import { repeat } from './sequencer.js'
 
 // CHROME FIX
 // UPDATE: there is a problem in chrome with starting audio context
 //  before a user gesture. This fixes it.
-// document.documentElement.addEventListener('mousedown', (e) => {
-//   e.preventDefault()
-//   if (Tone.context.state !== 'running') Tone.context.resume()
-// })
+document.documentElement.addEventListener('mousedown', (e) => {
+  e.preventDefault()
+  if (Tone.context.state !== 'running') Tone.context.resume()
+})
 // ==============================================================
 // DOM ELEMENTS
 // ==============================================================
@@ -25,7 +25,7 @@ const slider = document.querySelector('.slider')
 const output = document.querySelector('.bpm-value')
 
 // Setup beat markers
-// On 1, 5, 9, 13 step mark start of beat with css class
+// On 1, 5, 9, 13 step, mark start of beat with css class
 const markers = document.querySelectorAll('div > div:last-child > span')
 for (let i = 1; i < markers.length; i++) {
   markers[0].classList.add('beat-mark')
@@ -42,7 +42,6 @@ Tone.Transport.scheduleRepeat(repeat, '16n')
 // ==============================================================
 // EVENT LISTENERS
 // ==============================================================
-//  toggle css class on click event
 for (const span of spans) {
   span.addEventListener('click', singleClick)
   span.addEventListener('dblclick', doubleClick)
