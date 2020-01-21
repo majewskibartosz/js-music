@@ -10,7 +10,7 @@
 - Click on created step to erase it.   
 --  To erase green steps, click on it to make it yellow, then click again to delete.  
 - Visual representation of running sequencer (orange = swingOff, pink = swingOn).  
-- Purple underlines determines start of a beat (1 - 5 - 9 - 13). 
+- Purple underlines determines start of a beat (1 - 5 - 9 - 13).  
 --  Good place to enter step for a kick drum.  
 - Possibility to change tempo (BPM) - it affects timer in real time.  
 - Click on "Clear" to erase all steps.  
