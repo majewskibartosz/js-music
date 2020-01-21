@@ -10,7 +10,7 @@
 - Click on created step to erase it.   
 --  To erase green steps, click on it to make it yellow, then click again to delete.  
 - Visual representation of running sequencer (orange = swingOff, pink = swingOn).  
-- Possibility to change Beats Per Minute - it affects timer in real time.  
+- Possibility to change tempo (BPM) - it affects timer in real time.  
 - Click on "Clear" to erase all steps.  
 
 Have fun and make some noise!    
