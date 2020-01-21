@@ -58,6 +58,12 @@ GLOBAL STYLE
   box-sizing: border-box;
 }
 
+body {
+  min-width: 580px;
+  overflow-x:hidden;
+  overflow-y:hidden;
+}
+
 /* 
 ======================================
 CUSTOM STYLE
@@ -152,7 +158,6 @@ body {
 
 /* BPM SLIDER */
 .slider-container {
-  /* margin-top: 1.5em; */
   margin: 1em auto;
   width: 480px;
   font-family: "Lucida Console", Monaco, monospace;
