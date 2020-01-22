@@ -7,14 +7,14 @@ function toggleButton (button) {
   // setup swing button behaviour
   if (button.classList.contains('swing')) {
     if (button.value === 'OFF') {
-      Tone.Transport.swing = 0.1
+      Tone.Transport.swing = 0.25
       button.value = 'ON'
-      button.textContent = 'SWING OFF'
+      button.textContent = 'SWING ON_'
       hasSwing = true
     } else {
       Tone.Transport.swing = 0
       button.value = 'OFF'
-      button.textContent = 'SWING ON_'
+      button.textContent = 'SWING OFF'
       hasSwing = false
     }
     return hasSwing
@@ -22,19 +22,13 @@ function toggleButton (button) {
     if (button.value === 'ON') {
       Tone.Transport.stop()
       button.value = 'OFF'
-      button.textContent = 'PLAY_'
+      button.textContent = 'PAUSE'
     } else {
       Tone.Transport.start()
       button.value = 'ON'
-      button.textContent = 'PAUSE'
+      button.textContent = 'PLAY_'
     }
   }
-}
-
-function modifyClass (el, action, elClass) {
-  action === 'add' ? el.classList.add(elClass)
-    : action === 'remove' ? el.classList.remove(elClass)
-      : el.classList.toggle(elClass)
 }
 
 // Add or remove class - depends on swing status
@@ -50,6 +44,12 @@ function modifyHighlightClass (el) {
       modifyClass(el, 'remove', 'highlight-swing')
     }, 120)
   }
+}
+
+function modifyClass (el, action, elClass) {
+  action === 'add' ? el.classList.add(elClass)
+    : action === 'remove' ? el.classList.remove(elClass)
+      : el.classList.toggle(elClass)
 }
 
 function singleClick (el) {

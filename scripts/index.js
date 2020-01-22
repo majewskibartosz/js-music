@@ -16,13 +16,23 @@ const clearBtn = document.getElementsByClassName('switch')[2]
 const slider = document.querySelector('.slider')
 const output = document.querySelector('.bpm-value')
 
-// Setup beat markers
+// ==============================================================
+// BOTTOM ROW BEAT MARKERS AND PRESET PATTERN
+// ==============================================================
+// Setup beat markers (BOTTOM ROW)
 // On 1, 5, 9, 13 step, mark start of beat with css class
-const markers = document.querySelectorAll('div > div:last-child > span')
-for (let i = 1; i < markers.length; i++) {
-  markers[0].classList.add('beat-mark')
+const steps = document.querySelectorAll('div > div:last-child > span')
+for (let i = 1; i < steps.length; i++) {
+  steps[0].classList.add('beat-mark')
   if (i % 4 === 0) {
-    markers[i].classList.add('beat-mark')
+    steps[i].classList.add('beat-mark')
+  }
+}
+// Setup preset pattern (BOTTOM ROW)
+for (let i = 1; i < steps.length; i++) {
+  steps[0].classList.add('clicked')
+  if (i % 4 === 0) {
+    steps[i].classList.add('clicked')
   }
 }
 
