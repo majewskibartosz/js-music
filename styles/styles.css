@@ -203,18 +203,26 @@ body {
   cursor: pointer;
 }
 
-i {
-  color: rgb(216, 2, 134);
-  cursor: pointer; 
+/* HELP MESSAGE */
+.message-container {
+  position: absolute;
+  left: 50%;
+  margin-left: -245px;
+  top: 5%;
+  width: 500px;
+  filter: none;
+  z-index:100;
+  background-color: rgba(0, 0, 0, 0.78);
+  border-radius: 15px;
+}
+.message {
+  margin: 5% 5%;
+  color: rgb(72, 255, 0);
+  line-height: 1.5;
 }
 
 
-/* HELP MESSAGE */
-.help-message {
-  display: block;
-  position: fixed;
-  margin-top: 10px;
-  width:100%;
-  filter: none;
-  z-index:100;
+i {
+  color: rgb(216, 2, 134);
+  cursor: pointer; 
 }

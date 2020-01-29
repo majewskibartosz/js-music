@@ -82,23 +82,26 @@ slider.oninput = function() {
 // Setup helper message
 const message = document.createElement('p')
 message.innerText = `
-- Single click create step with full velocity (yellow).
-- Double click create step with half velocity (green).
-- Click on created step to erase it.
-- To erase green steps, click on it to make it yellow, then click again to delete.
-- Visual representation of running sequencer (orange = swingOff, pink = swingOn).
-- Purple underlines determines start of a beat (1 - 5 - 9 - 13).  
+> Single click create step with full velocity (yellow).
+> Double click create step with half velocity (green).
+> Click on created step to erase it.
+> To erase green steps, click on it to make it yellow, then click again to delete.
+> Visual representation of running sequencer (orange = swingOff, pink = swingOn).
+> Purple underlines determines start of a beat (1 - 5 - 9 - 13).  
 
-  CLICK ANY KEY TO CLOSE
+----------- CLICK ANY KEY TO CLOSE -----------
 `
+const container = document.createElement('div')
 // Setup help button instructions
 helpBtn.addEventListener('click', (e) => {
   e.preventDefault()
   for (const item of content) {
     item.classList.add('blur')
     if (item.classList.contains('blur')) {
-      message.classList.add('help-message')
-      document.body.appendChild(message)
+      container.classList.add('message-container')
+      message.classList.add('message')
+      document.body.appendChild(container)
+      container.appendChild(message)
       document.addEventListener('keydown', () => {
         item.classList.remove('blur')
         message.remove()
