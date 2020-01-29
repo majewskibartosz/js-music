@@ -82,14 +82,14 @@ slider.oninput = function() {
 // Setup helper message
 const message = document.createElement('p')
 message.innerText = `
-> Single click create step with full velocity (yellow).
-> Double click create step with half velocity (green).
+> Single click create step with full velocity \xa0 (yellow).
+> Double click create step with half velocity \xa0 (green).
 > Click on created step to erase it.
-> To erase green steps, click on it to make it yellow, then click again to delete.
-> Visual representation of running sequencer (orange = swingOff, pink = swingOn).
-> Purple underlines determines start of a beat (1 - 5 - 9 - 13).  
+> To erase green steps, click on it to make it \xa0 yellow, then click again to delete.
+> Visual representation of running sequencer \xa0\xa0(orange = swingOff, pink = swingOn).
+> Purple underlines determines start of a beat \xa0 (1 - 5 - 9 - 13).  
 
------------ CLICK ANY KEY TO CLOSE -----------
+\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0PRESS ANY KEY TO CONTINUE
 `
 const container = document.createElement('div')
 // Setup help button instructions
