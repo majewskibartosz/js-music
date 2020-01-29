@@ -4,13 +4,16 @@ import { repeat } from './sequencer.js'
 // ==============================================================
 // DOM ELEMENTS
 // ==============================================================
+const content = document.querySelectorAll('.content, .controls')
+
 // Select all boxes (spans)
-const spans = document.querySelectorAll('span')
+const spans = document.querySelectorAll('.box')
 
 // Select button elements
 const playBtn = document.getElementsByClassName('switch')[0]
 const swingBtn = document.getElementsByClassName('switch')[1]
 const clearBtn = document.getElementsByClassName('switch')[2]
+const helpBtn = document.getElementsByTagName('i')[0]
 
 // Select range slider (bpm)
 const slider = document.querySelector('.slider')
@@ -71,7 +74,35 @@ clearBtn.addEventListener('click', (e) => {
 
 // Setup BPM slider
 output.innerHTML = slider.value
-slider.oninput = function () {
+slider.oninput = function() {
   output.innerHTML = this.value
   Tone.Transport.bpm.value = this.value
 }
+
+// Setup helper message
+const message = document.createElement('p')
+message.innerText = `
+- Single click create step with full velocity (yellow).
+- Double click create step with half velocity (green).
+- Click on created step to erase it.
+- To erase green steps, click on it to make it yellow, then click again to delete.
+- Visual representation of running sequencer (orange = swingOff, pink = swingOn).
+- Purple underlines determines start of a beat (1 - 5 - 9 - 13).  
+
+  CLICK ANY KEY TO CLOSE
+`
+// Setup help button instructions
+helpBtn.addEventListener('click', (e) => {
+  e.preventDefault()
+  for (const item of content) {
+    item.classList.add('blur')
+    if (item.classList.contains('blur')) {
+      message.classList.add('help-message')
+      document.body.appendChild(message)
+      document.addEventListener('keydown', () => {
+        item.classList.remove('blur')
+        message.remove()
+      })
+    }
+  }
+})

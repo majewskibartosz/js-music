@@ -58,12 +58,6 @@ GLOBAL STYLE
   box-sizing: border-box;
 }
 
-body {
-  min-width: 580px;
-  overflow-x:hidden;
-  overflow-y:hidden;
-}
-
 /* 
 ======================================
 CUSTOM STYLE
@@ -71,7 +65,13 @@ CUSTOM STYLE
 */
 
 body {
+  min-width: 580px;
   margin: 40px;
+  overflow-x:hidden;
+  overflow-y:hidden;
+  user-select: none; 
+  filter: blur(0);
+  font-family: "Lucida Console", Monaco, monospace;
 }
 
 .content {
@@ -127,10 +127,16 @@ body {
   background-color: rgba(255, 82, 189, 0.747);
 }
 
+.blur {
+  filter: blur(4px);
+  pointer-events: none;
+}
+
 .beat-mark {
   box-shadow: 0 10px 0 rgb(255, 255, 255),
               0 12px 0 rgb(216, 2, 134)
 }
+
 
 /* BUTTONS */
 .switch {
@@ -195,4 +201,20 @@ body {
   height: 25px;
   background: #D80286;
   cursor: pointer;
+}
+
+i {
+  color: rgb(216, 2, 134);
+  cursor: pointer; 
+}
+
+
+/* HELP MESSAGE */
+.help-message {
+  display: block;
+  position: fixed;
+  margin-top: 10px;
+  width:100%;
+  filter: none;
+  z-index:100;
 }

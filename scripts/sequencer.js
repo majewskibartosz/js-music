@@ -32,7 +32,7 @@ let index = 0
 
 const velocity = (Math.random() * 0.5 + 0.5) // randomize velocity of each step
 //  MAIN SEQUENCER LOOP
-function repeat (time) {
+function repeat(time) {
   const step = index % 16
   for (let i = 0; i < rows.length; i++) {
     const sound = sounds[i]

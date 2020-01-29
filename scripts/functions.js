@@ -3,7 +3,7 @@
 // METHODS
 // ==============================================================
 let hasSwing = false
-function toggleButton (button) {
+function toggleButton(button) {
   // setup swing button behaviour
   if (button.classList.contains('swing')) {
     if (button.value === 'OFF') {
@@ -32,7 +32,7 @@ function toggleButton (button) {
 }
 
 // Add or remove class - depends on swing status
-function modifyHighlightClass (el) {
+function modifyHighlightClass(el) {
   if (!hasSwing) {
     modifyClass(el, 'add', 'highlight')
     setTimeout(() => { // Delete highlight class after specified time
@@ -46,22 +46,25 @@ function modifyHighlightClass (el) {
   }
 }
 
-function modifyClass (el, action, elClass) {
+function modifyClass(el, action, elClass) {
   action === 'add' ? el.classList.add(elClass)
     : action === 'remove' ? el.classList.remove(elClass)
       : el.classList.toggle(elClass)
 }
 
-function singleClick (el) {
+function singleClick(el) {
   el = el.target
   modifyClass(el, 'toggle', 'clicked')
   modifyClass(el, 'remove', 'dbl-clicked')
 }
 
-function doubleClick (el) {
+function doubleClick(el) {
   el = el.target
   modifyClass(el, 'toggle', 'dbl-clicked')
   modifyClass(el, 'remove', 'clicked')
 }
 
-export { toggleButton, modifyHighlightClass, singleClick, doubleClick }
+export {
+  toggleButton, modifyHighlightClass,
+  singleClick, doubleClick
+}
