@@ -104,7 +104,11 @@ helpBtn.addEventListener('click', (e) => {
       container.appendChild(message)
       document.addEventListener('keydown', () => {
         item.classList.remove('blur')
-        message.remove()
+        container.classList.add('message-container--delete')
+        setTimeout(() => {
+          message.remove()
+          container.classList.remove('message-container--delete')
+        }, 250)
       })
     }
   }

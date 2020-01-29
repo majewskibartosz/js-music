@@ -214,11 +214,41 @@ body {
   z-index:100;
   background-color: rgba(0, 0, 0, 0.78);
   border-radius: 15px;
+  animation: slide-up 0.4s ease;
 }
+
+.message-container--delete {
+  animation: slide-down 0.4s ease;
+}
+
+@keyframes slide-up {
+  0% {
+      opacity: 0;
+      transform: translateY(-50px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  0% {
+      opacity: 1;
+      transform: translateY(0px);
+  }
+  100% {
+      opacity: 0;
+      transform: translateY(-50px);
+  }
+}
+
+
 .message {
   margin: 5% 5%;
   color: rgb(72, 255, 0);
   line-height: 1.5;
+  overflow: hidden;
 }
 
 
