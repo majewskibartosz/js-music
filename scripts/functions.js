@@ -9,7 +9,7 @@ function toggleButton(button) {
     if (button.value === 'OFF') {
       Tone.Transport.swing = 0.25
       button.value = 'ON'
-      button.textContent = 'SWING ON_'
+      button.textContent = 'SWING ON\xa0'
       hasSwing = true
     } else {
       Tone.Transport.swing = 0
