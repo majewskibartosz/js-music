@@ -19,14 +19,15 @@ function toggleButton(button) {
     }
     return hasSwing
   } else { // setup play/pause button behaviour
+    const playStopBtn = document.querySelector('button > i')
     if (button.value === 'ON') {
       Tone.Transport.stop()
       button.value = 'OFF'
-      button.textContent = 'PAUSE'
+      playStopBtn.textContent = 'pause'
     } else {
       Tone.Transport.start()
       button.value = 'ON'
-      button.textContent = 'PLAY_'
+      playStopBtn.textContent = 'play_arrow'
     }
   }
 }

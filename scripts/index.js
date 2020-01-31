@@ -13,7 +13,7 @@ const spans = document.querySelectorAll('.box')
 const playBtn = document.getElementsByClassName('switch')[0]
 const swingBtn = document.getElementsByClassName('switch')[1]
 const clearBtn = document.getElementsByClassName('switch')[2]
-const helpBtn = document.getElementsByTagName('i')[0]
+const helpBtn = document.getElementsByTagName('i')[1]
 
 // Select range slider (bpm)
 const slider = document.querySelector('.slider')

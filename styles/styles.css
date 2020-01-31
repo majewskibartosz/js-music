@@ -145,6 +145,7 @@ body {
   border: 2px solid rgb(216, 2, 134);
   border-radius: 0px;
   padding: 18px 36px;
+  height: 60px;
   display: inline-block;
   font-family: "Lucida Console", Monaco, monospace;
   font-size: 14px;
@@ -252,7 +253,13 @@ body {
 }
 
 
-i {
+.help {
   color: rgb(216, 2, 134);
   cursor: pointer; 
+}
+
+button > i {
+  margin-top: -20px;
+  position: relative;
+  top: 7px;
 }
