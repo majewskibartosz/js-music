@@ -10,11 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "live-server": "^1.2.1",
+    "live-server": "^1.1.0",
     "tone": "^13.8.25"
   },
   "devDependencies": {
-    "eslint": "^6.6.0",
+    "eslint": "^8.1.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-node": "^10.0.0",
