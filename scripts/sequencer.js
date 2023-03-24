@@ -37,8 +37,8 @@ const repeat = (time) => {
   rows.forEach((row, i) => {
     const sound = sounds[i];
     const input = [...row.children][step];
-    const hasClicked = input.classList.contains('clicked');
-    const hasDoubleClicked = input.classList.contains('dbl-clicked');
+    const hasClicked = input?.classList?.contains('clicked');
+    const hasDoubleClicked = input?.classList?.contains('dbl-clicked');
     
     if (hasClicked) {
       kit.triggerAttack(sound, time, velocity);
