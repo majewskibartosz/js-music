@@ -4,80 +4,52 @@ import { repeat } from './sequencer.js'
 // ==============================================================
 // DOM ELEMENTS
 // ==============================================================
-const content = document.querySelectorAll('.content, .controls')
+const content = document.querySelectorAll('.content, .controls');
 
-// Select all boxes (spans)
-const spans = document.querySelectorAll('.box')
+const spans = document.querySelectorAll('.box');
 
-// Select button elements
-const playBtn = document.getElementsByClassName('switch')[0]
-const swingBtn = document.getElementsByClassName('switch')[1]
-const clearBtn = document.getElementsByClassName('switch')[2]
-const helpBtn = document.getElementsByTagName('i')[1]
+const [playBtn, swingBtn, clearBtn] = document.querySelectorAll('.switch');
+const helpBtn = document.querySelector('i:nth-of-type(2)');
 
-// Select range slider (bpm)
-const slider = document.querySelector('.slider')
-const output = document.querySelector('.bpm-value')
+const slider = document.querySelector('.slider');
+const output = document.querySelector('.bpm-value');
 
-// ==============================================================
-// BOTTOM ROW BEAT MARKERS AND PRESET PATTERN
-// ==============================================================
-// Setup beat markers (BOTTOM ROW)
-// On 1, 5, 9, 13 step, mark start of beat with css class
-const steps = document.querySelectorAll('div > div:last-child > span')
-for (let i = 1; i < steps.length; i++) {
-  steps[0].classList.add('beat-mark')
+const steps = document.querySelectorAll('div > div:last-child > span');
+steps.forEach((step, i) => {
   if (i % 4 === 0) {
-    steps[i].classList.add('beat-mark')
+    step.classList.add('beat-mark', 'clicked');
   }
-}
-// Setup preset pattern (BOTTOM ROW)
-for (let i = 1; i < steps.length; i++) {
-  steps[0].classList.add('clicked')
-  if (i % 4 === 0) {
-    steps[i].classList.add('clicked')
-  }
-}
+});
 
-// ==============================================================
-// START SEQUENCER LOOP
-// ==============================================================
-Tone.Transport.scheduleRepeat(repeat, '16n')
+Tone.Transport.scheduleRepeat(repeat, '16n');
 
-// ==============================================================
-// EVENT LISTENERS
-// ==============================================================
-for (const span of spans) {
-  span.addEventListener('click', singleClick)
-  span.addEventListener('dblclick', doubleClick)
-}
+spans.forEach((span) => {
+  span.addEventListener('click', singleClick);
+  span.addEventListener('dblclick', doubleClick);
+});
 
-// Setup play/pause button
 playBtn.addEventListener('click', (e) => {
-  e.preventDefault()
-  toggleButton(playBtn)
-})
+  e.preventDefault();
+  toggleButton(playBtn);
+});
 
-// Setup swing button
 swingBtn.addEventListener('click', (e) => {
-  e.preventDefault()
-  toggleButton(swingBtn)
-})
+  e.preventDefault();
+  toggleButton(swingBtn);
+});
 
-// Setup clear button
 clearBtn.addEventListener('click', (e) => {
-  e.preventDefault()
-  for (const span of spans) {
-    span.classList.remove('clicked', 'dbl-clicked')
-  }
-})
+  e.preventDefault();
+  spans.forEach((span) => {
+    span.classList.remove('clicked', 'dbl-clicked');
+  });
+});
 
-// Setup BPM slider
-output.innerHTML = slider.value
-slider.oninput = function() {
-  output.innerHTML = this.value
-  Tone.Transport.bpm.value = this.value
-}
+output.textContent = slider.value;
+slider.oninput = function () {
+  output.textContent = this.value;
+  Tone.Transport.bpm.value = this.value;
+};
 
 // Setup helper message
 const message = document.createElement('p')
@@ -91,25 +63,25 @@ message.innerText = `
 
 \xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0PRESS ANY KEY TO CONTINUE
 `
-const container = document.createElement('div')
+const container = document.createElement('div');
 // Setup help button instructions
 helpBtn.addEventListener('click', (e) => {
-  e.preventDefault()
-  for (const item of content) {
-    item.classList.add('blur')
-    if (item.classList.contains('blur')) {
-      container.classList.add('message-container')
-      message.classList.add('message')
-      document.body.appendChild(container)
-      container.appendChild(message)
+  e.preventDefault();
+  content.forEach((item) => {
+    item?.classList?.add('blur');
+    if (item?.classList?.contains('blur')) {
+      container?.classList?.add('message-container');
+      message?.classList?.add('message');
+      document.body.appendChild(container);
+      container.appendChild(message);
       document.addEventListener('keydown', () => {
-        item.classList.remove('blur')
-        container.classList.add('message-container--delete')
+        item?.classList?.remove('blur');
+        container?.classList?.add('message-container--delete');
         setTimeout(() => {
-          message.remove()
-          container.classList.remove('message-container--delete')
-        }, 250)
-      })
+          message?.remove();
+          container?.classList?.remove('message-container--delete');
+        }, 250);
+      });
     }
-  }
-})
+  });
+});
