@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+import * as Tone from 'tone';
 import { toggleButton, singleClick, doubleClick } from './functions.js';
 import { repeat } from './sequencer.js';
 // ==============================================================
