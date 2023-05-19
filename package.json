@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "live-server",
-    "lint": "eslint"
+    "lint": "eslint '*/**/*.{js,ts}' --quiet --fix",
+    "format": "prettier --write '*/**/*.{js,ts}'",
+    "prebuild": "rimraf ./build",
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
@@ -14,11 +17,18 @@
     "tone": "^13.8.25"
   },
   "devDependencies": {
-    "eslint": "^8.1.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.6",
+    "@typescript-eslint/parser": "^5.59.6",
+    "eslint": "^8.41.0",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^10.0.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1"
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-standard": "^5.0.0",
+    "prettier": "^2.8.8",
+    "rimraf": "^5.0.1",
+    "typescript": "^5.0.4"
   }
 }
