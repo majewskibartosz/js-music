@@ -1,7 +1,7 @@
 # MusicJS  
 [Live demo](https://musicjs.netlify.app/)
 
-    16 step, music sequencer with bpm and swing controls written in TypeScript.  
+    16 step, music sequencer with bpm and swing controls written in JavaScript.  
 
 ## INSTRUCTIONS:  
 
