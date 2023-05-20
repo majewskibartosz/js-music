@@ -1,15 +1,14 @@
 /* eslint-disable no-undef */
 import { toggleButton, singleClick, doubleClick } from './functions.js';
 import { repeat } from './sequencer.js';
-// ==============================================================
+
 // DOM ELEMENTS
-// ==============================================================
 const content = document.querySelectorAll('.content, .controls');
 
 const spans = document.querySelectorAll('.box');
 
 const [playBtn, swingBtn, clearBtn] = document.querySelectorAll('.switch');
-const helpBtn = document.querySelector('i:nth-of-type(2)');
+const helpBtn = document.querySelector('.material-icons.help');
 
 const slider = document.querySelector('.slider');
 const output = document.querySelector('.bpm-value');
@@ -51,37 +50,62 @@ slider.oninput = function () {
   Tone.Transport.bpm.value = this.value;
 };
 
-// Setup helper message
-const message = document.createElement('p');
-message.innerText = `
-> Single click create step with full velocity \xa0 (yellow).
-> Double click create step with half velocity \xa0 (green).
-> Click on created step to erase it.
-> To erase green steps, click on it to make it \xa0 yellow, then click again to delete.
-> Visual representation of running sequencer \xa0\xa0(orange = swingOff, pink = swingOn).
-> Purple underlines determines start of a beat \xa0 (1 - 5 - 9 - 13).  
+// Add click event listener to the help button
+helpBtn.addEventListener('click', displayHelpMessage);
 
-\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0PRESS ANY KEY TO CONTINUE
-`;
-const container = document.createElement('div');
-// Setup help button instructions
-helpBtn.addEventListener('click', (e) => {
-  e.preventDefault();
+function createMessageElement() {
+  const messageElement = document.createElement('p');
+  messageElement.innerText = `
+    > Single click create step with full velocity \xa0 (yellow).
+    > Double click create step with half velocity \xa0 (green).
+    > Click on created step to erase it.
+    > To erase green steps, click on it to make it \xa0 yellow, then click again to delete.
+    > Visual representation of running sequencer \xa0\xa0(orange = swingOff, pink = swingOn).
+    > Purple underlines determines start of a beat \xa0 (1 - 5 - 9 - 13).  
+
+    \xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0PRESS ANY KEY TO CONTINUE
+  `;
+  messageElement.classList.add('message');
+
+  return messageElement;
+}
+
+function createContainerElement() {
+  const containerElement = document.createElement('div');
+  return containerElement;
+}
+
+function displayHelpMessage(event) {
+  const container = createContainerElement();
+  const message = createMessageElement();
+
+  event.preventDefault();
+
   content.forEach((item) => {
-    item?.classList?.add('blur');
-    if (item?.classList?.contains('blur')) {
-      container?.classList?.add('message-container');
-      message?.classList?.add('message');
-      document.body.appendChild(container);
-      container.appendChild(message);
-      document.addEventListener('keydown', () => {
-        item?.classList?.remove('blur');
-        container?.classList?.add('message-container--delete');
-        setTimeout(() => {
-          message?.remove();
-          container?.classList?.remove('message-container--delete');
-        }, 250);
-      });
-    }
+    item.classList.add('blur');
   });
-});
+
+  container.classList.add('message-container');
+  document.body.appendChild(container);
+  container.appendChild(message);
+
+  document.addEventListener('keydown', removeHelpMessage);
+}
+
+function removeHelpMessage() {
+  const container = document.querySelector('.message-container');
+  const message = document.querySelector('.message');
+
+  content.forEach((item) => {
+    item.classList.remove('blur');
+  });
+
+  container.classList.add('message-container--delete');
+
+  setTimeout(() => {
+    message.remove();
+    container.classList.remove('message-container--delete');
+  }, 250);
+
+  document.removeEventListener('keydown', removeHelpMessage);
+}
