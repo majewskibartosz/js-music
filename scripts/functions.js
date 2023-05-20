@@ -1,4 +1,3 @@
-import * as Tone from 'tone';
 /* eslint-disable no-undef */
 // ==============================================================
 // METHODS
@@ -72,4 +71,9 @@ const doubleClick = (el) => {
   modifyClass(el, 'remove', 'clicked');
 };
 
-export { toggleButton, modifyHighlightClass, singleClick, doubleClick };
+export {
+  toggleButton,
+  modifyHighlightClass,
+  singleClick,
+  doubleClick,
+};
