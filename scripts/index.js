@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
-import { toggleButton, singleClick, doubleClick } from './functions.js'
-import { repeat } from './sequencer.js'
+import { toggleButton, singleClick, doubleClick } from './functions.js';
+import { repeat } from './sequencer.js';
 // ==============================================================
 // DOM ELEMENTS
 // ==============================================================
@@ -52,7 +52,7 @@ slider.oninput = function () {
 };
 
 // Setup helper message
-const message = document.createElement('p')
+const message = document.createElement('p');
 message.innerText = `
 > Single click create step with full velocity \xa0 (yellow).
 > Double click create step with half velocity \xa0 (green).
@@ -62,7 +62,7 @@ message.innerText = `
 > Purple underlines determines start of a beat \xa0 (1 - 5 - 9 - 13).  
 
 \xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0PRESS ANY KEY TO CONTINUE
-`
+`;
 const container = document.createElement('div');
 // Setup help button instructions
 helpBtn.addEventListener('click', (e) => {
