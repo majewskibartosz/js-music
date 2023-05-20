@@ -1,4 +1,3 @@
-import * as Tone from 'tone';
 /* eslint-disable no-undef */
 // ==============================================================
 // METHODS

@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-import * as Tone from 'tone';
 import { modifyHighlightClass } from './functions.js';
 
 // ==============================================================
