@@ -1,4 +1,4 @@
-# MusicJS 🚄
+# MusicJS 
 
 A modern, browser-based 16-step drum sequencer with real-time BPM and swing controls. Create rhythmic patterns instantly with an intuitive grid interface, powered by Tone.js and vanilla JavaScript.
 
