@@ -2,7 +2,7 @@
 
 A modern, browser-based 16-step drum sequencer with real-time BPM and swing controls. Create rhythmic patterns instantly with an intuitive grid interface, powered by Tone.js and vanilla JavaScript.
 
-[Live demo on Railway 🚂💜](https://musicjs.railway.app/)
+[Live demo on Railway 🚂💜](https://js-music-production.up.railway.app/)
 
 [Live demo on Netlify](https://musicjs.netlify.app/)
 
