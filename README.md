@@ -93,5 +93,5 @@ ISC License – See LICENSE file for details
 
 ---
 
-Have fun making beats! 🚄    
+Have fun making beats!  
 
