@@ -15,7 +15,7 @@ A modern, browser-based 16-step drum sequencer with real-time BPM and swing cont
 - **Visual Feedback**: Real-time playback indicator with swing indicator (orange/pink highlight)
 - **Beat Markers**: Purple underlines at beat divisions (steps 1, 5, 9, 13) for kick drum placement
 - **One-Click Clear**: Reset all programmed steps instantly
-- **Responsive Design**: Works seamlessly across desktop and tablet devices
+
 
 ## How to Use
 
