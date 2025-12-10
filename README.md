@@ -87,10 +87,6 @@ The sequencer includes 8 drum samples across two octaves:
 | TOM | Tom Drum | D3 |
 | KICK | Kick Drum | G3 |
 
-## License
-
-ISC License – See LICENSE file for details
-
 ---
 
 Have fun making beats!  
